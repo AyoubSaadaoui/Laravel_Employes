@@ -25,6 +25,7 @@ class EmployesController extends Controller
     public function create()
     {
         //
+        return view('employes.create');
     }
 
     /**
@@ -33,6 +34,20 @@ class EmployesController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request, [
+            'fullname' => 'required',
+            'registration_number' => 'required|unique:employes',
+            'depart' => 'required',
+            'hire_date' => 'required',
+            'city' => 'required',
+            'phone' => 'required|numeric',
+            'address' => 'required'
+        ]);
+        $data = $request->except(['_token']);
+        Employe::create($data);
+        return redirect()->route("employes.index")->with([
+            "success" => "Employe added successfully"
+        ]);
     }
 
     /**
