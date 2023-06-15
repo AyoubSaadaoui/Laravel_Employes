@@ -64,6 +64,8 @@ class EmployesController extends Controller
     public function edit(string $id)
     {
         //
+        $employe = Employe::where('registration_number', $id)->first();
+        return view('employes.edit')->with(compact('employe'));
     }
 
     /**
@@ -72,6 +74,21 @@ class EmployesController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $employe = Employe::where('registration_number', $id)->first();
+        $this->validate($request, [
+            'fullname' => 'required',
+            'registration_number' => 'required|unique:employes,id,' . $employe->id,
+            'depart' => 'required',
+            'hire_date' => 'required',
+            'city' => 'required',
+            'phone' => 'required|numeric',
+            'address' => 'required'
+        ]);
+        $data = $request->except(['_token', '_method']);
+        $employe->update($data);
+        return redirect()->route("employes.index")->with([
+            "success" => "Employe updated successfully"
+        ]);
     }
 
     /**
