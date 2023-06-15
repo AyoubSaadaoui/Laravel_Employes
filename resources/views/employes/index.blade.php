@@ -61,4 +61,18 @@
         </div>
     </div>
 </div>
-@endsection
+@stop
+
+@section('js')
+    <script>
+        $(document).ready( function () {
+            $('#myTable').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'excel', 'csv', 'pdf', 'print', 'colvis'
+                ]
+            });
+        });
+    </script>
+    
+@stop
