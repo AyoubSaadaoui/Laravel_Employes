@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+// use App\Http\Controllers\EmployesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,5 +22,6 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/home', function () {
         return view('home');
     })->name('home');
-    
+    Route::resource('employes', 'App\Http\Controllers\EmployesController');
+
 });
