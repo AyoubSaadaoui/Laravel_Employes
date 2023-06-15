@@ -48,7 +48,7 @@
                                         @csrf
                                         @method("DELETE")
                                     </form>
-                                    <button onclick="deleteAd({{$employe->registration_number}})"
+                                    <button onclick="deleteAlert({{$employe->registration_number}})"
                                         type="submit" class="btn btn-sm btn-danger">
                                         <i class="fa fa-trash"></i>
                                     </button>
@@ -74,7 +74,7 @@
             });
         });
     </script>
-    
+
     @if(session()->has("success"))
     <script>
         Swal.fire({
@@ -86,4 +86,39 @@
         });
     </script>
     @endif
+
+    <script>
+        function deleteAlert(id){
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: 'btn btn-success',
+                    cancelButton: 'btn btn-danger mr-2'
+                },
+                buttonsStyling: false
+                })
+
+                swalWithBootstrapButtons.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes, delete it!',
+                    cancelButtonText: 'No, cancel!',
+                    reverseButtons: true
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById(id).submit();
+                } else if (
+                    /* Read more about handling dismissals below */
+                    result.dismiss === Swal.DismissReason.cancel
+                ) {
+                    swalWithBootstrapButtons.fire(
+                        'Cancelled',
+                        'Your ad is safe :)',
+                        'error'
+                    )
+                }
+                })
+        }
+    </script>
 @stop

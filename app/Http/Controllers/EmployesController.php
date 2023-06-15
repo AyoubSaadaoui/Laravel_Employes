@@ -97,5 +97,10 @@ class EmployesController extends Controller
     public function destroy(string $id)
     {
         //
+        $employe = Employe::where('registration_number', $id)->first();
+        $employe->delete();
+        return redirect()->route("employes.index")->with([
+            "success" => "Employe deleted successfully"
+        ]);
     }
 }
