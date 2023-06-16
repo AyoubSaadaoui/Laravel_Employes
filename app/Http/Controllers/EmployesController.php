@@ -108,6 +108,14 @@ class EmployesController extends Controller
         ]);
     }
 
+    public function getWorkCertificate($id)
+    {
+        $employe = Employe::where('registration_number', $id)->first();
+        return view("employes.certificate")->with([
+            "employe" => $employe
+        ]);
+    }
+
     public function vacationRequest($id)
     {
         $employe = Employe::where('registration_number', $id)->first();
