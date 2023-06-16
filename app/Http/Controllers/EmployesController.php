@@ -56,6 +56,10 @@ class EmployesController extends Controller
     public function show(string $id)
     {
         //
+        $employe = Employe::where('registration_number', $id)->first();
+        return view("employes.show")->with([
+            "employe" => $employe
+        ]);
     }
 
     /**
