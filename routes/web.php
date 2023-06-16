@@ -23,5 +23,9 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         return view('home');
     })->name('home');
     Route::resource('employes', 'App\Http\Controllers\EmployesController');
+    Route::get('employes/{id}/certificate', 'App\Http\Controllers\EmployesController@getWorkCertificate')
+        ->name('work.certificate');
+    Route::get('employes/{id}/vacation', 'App\Http\Controllers\EmployesController@vacationRequest')
+        ->name('work.vacation');
 
 });

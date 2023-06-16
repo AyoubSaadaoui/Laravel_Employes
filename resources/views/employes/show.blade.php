@@ -16,11 +16,11 @@
                 <div class="card-body">
                     <div class="form-group row mb-0">
                         <div class="col-md-12">
-                            <a href="#"
+                            <a href="{{route('work.vacation',$employe->registration_number)}}"
                                 class="btn btn-outline-dark">
                                 Vacation request
                             </a>
-                            <a href="#"
+                            <a href="{{route('work.certificate',$employe->registration_number)}}"
                                 class="btn btn-outline-danger">
                                 Work certificate
                             </a>

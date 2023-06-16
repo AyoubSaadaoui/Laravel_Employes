@@ -107,4 +107,12 @@ class EmployesController extends Controller
             "success" => "Employe deleted successfully"
         ]);
     }
+
+    public function vacationRequest($id)
+    {
+        $employe = Employe::where('registration_number', $id)->first();
+        return view("employes.vacation")->with([
+            "employe" => $employe
+        ]);
+    }
 }
